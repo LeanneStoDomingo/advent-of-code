@@ -6,69 +6,55 @@ play = [a.split() for a in puzzle_input]
 
 total = 0
 
+score = {
+    'X': {
+        'A': 3 + 1,
+        'B': 0 + 1,
+        'C': 6 + 1,
+    },
+    'Y': {
+        'A': 6 + 2,
+        'B': 3 + 2,
+        'C': 0 + 2,
+    },
+    'Z': {
+        'A': 0 + 3,
+        'B': 6 + 3,
+        'C': 3 + 3,
+    },
+}
+
 for p in play:
-    if len(p) != 2:
-        continue
+    if len(p) == 2:
+        total += score[p[1]][p[0]]
 
-    me = p[1]
-    them = p[0]
-
-    if me == 'X':
-        total += 1
-        if them == 'A':
-            total += 3
-        elif them == 'C':
-            total += 6
-    elif me == 'Y':
-        total += 2
-        if them == 'B':
-            total += 3
-        elif them == 'A':
-            total += 6
-    elif me == 'Z':
-        total += 3
-        if them == 'C':
-            total += 3
-        elif them == 'B':
-            total += 6
-
-print(f'Part one: {total}')
+print('Part one:', total)
 
 
 total = 0
 
-tie = {
-    'A': 1,
-    'B': 2,
-    'C': 3,
+score = {
+    'X': {
+        'A': 3,
+        'B': 1,
+        'C': 2,
+    },
+    'Y': {
+        'A': 1 + 3,
+        'B': 2 + 3,
+        'C': 3 + 3,
+    },
+    'Z': {
+        'A': 2 + 6,
+        'B': 3 + 6,
+        'C': 1 + 6,
+    }
 }
 
-lose = {
-    'A': 3,
-    'B': 1,
-    'C': 2,
-}
-
-win = {
-    'A': 2,
-    'B': 3,
-    'C': 1,
-}
 
 for p in play:
-    if len(p) != 2:
-        continue
+    if len(p) == 2:
+        total += score[p[1]][p[0]]
 
-    me = p[1]
-    them = p[0]
 
-    if me == 'X':
-        total += lose[them]
-    elif me == 'Y':
-        total += 3
-        total += tie[them]
-    elif me == 'Z':
-        total += 6
-        total += win[them]
-
-print(f'Part two: {total}')
+print('Part two:', total)
